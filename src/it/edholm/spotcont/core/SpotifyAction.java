@@ -17,6 +17,7 @@
 package it.edholm.spotcont.core;
 
 import it.edholm.spotcont.core.utilities.IFactory;
+import it.edholm.spotcont.models.Song;
 
 /**
  * Used to simplify doing an action parsed from the command line.
@@ -28,7 +29,8 @@ public enum SpotifyAction {
     PRINT_SONG {
         @Override
         public void doAction() {
-            System.out.print(spotifyController.getSong().toString());
+            Song song = spotifyController.getSong();
+            System.out.print(song != null ? song.toString() : "No song playing");
         }
     },
     PLAY {
