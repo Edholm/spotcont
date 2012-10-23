@@ -30,7 +30,7 @@ public enum SpotifyAction {
         @Override
         public void doAction() {
             Song song = spotifyController.getSong();
-            System.out.print(song != null ? song.toString() : "No song playing");
+            System.out.print(song != null ? song.toString() : "No song playing\n");
         }
     },
     PLAY {
