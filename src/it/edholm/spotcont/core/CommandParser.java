@@ -50,10 +50,18 @@ class CommandParser {
         }
         if (options.play) {
             action.add(SpotifyAction.PLAY);
-        } else if (options.pause) {
+        }
+        if (options.pause) {
             action.add(SpotifyAction.PAUSE);
-        } else if (options.toggle) {
+        }
+        if (options.toggle) {
             action.add(SpotifyAction.TOGGLE);
+        }
+        if(options.next) {
+            action.add(SpotifyAction.NEXT);
+        }
+        if(options.prev) {
+            action.add(SpotifyAction.PREVIOUS);
         }
 
         return action;

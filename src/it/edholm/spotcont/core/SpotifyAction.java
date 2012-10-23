@@ -51,6 +51,18 @@ public enum SpotifyAction {
             spotifyController.toggle();
         }
     },
+    NEXT {
+        @Override
+        public void doAction() {
+            spotifyController.next();
+        }
+    },
+    PREVIOUS {
+        @Override
+        public void doAction() {
+            spotifyController.previous();
+        }
+    },
     NOTHING {
         @Override
         public void doAction() { /* Do nothing. Useful to avoid null checks */ }
