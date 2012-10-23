@@ -14,32 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.edholm.spotcont.core;
+package it.edholm.spotcont.core.utilities;
 
 /**
- * Singleton for getting various application information such as name, version etc.
+ * Generic interface for defining a factory
  *
  * @author Emil Edholm
- * @date 2012-10-23
+ * @date 10/23/12
  */
-public class ApplicationInfo {
-
-    private static ApplicationInfo ourInstance;
-
-    private ApplicationInfo() { }
-
-    public static ApplicationInfo getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new ApplicationInfo();
-        }
-        return ourInstance;
-    }
-
-    public String getApplicationName() {
-        return "SpotCont";
-    }
-
-    public String getVersion() {
-        return "V0.1-alpha";
-    }
+public interface IFactory<T> {
+    T create();
 }

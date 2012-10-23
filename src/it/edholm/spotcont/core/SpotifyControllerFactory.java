@@ -16,30 +16,18 @@
  */
 package it.edholm.spotcont.core;
 
+import it.edholm.spotcont.core.utilities.IFactory;
+
 /**
- * Singleton for getting various application information such as name, version etc.
+ * Creates a Spotify controller.
  *
  * @author Emil Edholm
- * @date 2012-10-23
+ * @date 10/23/12
  */
-public class ApplicationInfo {
+public class SpotifyControllerFactory implements IFactory<Spotify> {
 
-    private static ApplicationInfo ourInstance;
-
-    private ApplicationInfo() { }
-
-    public static ApplicationInfo getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new ApplicationInfo();
-        }
-        return ourInstance;
-    }
-
-    public String getApplicationName() {
-        return "SpotCont";
-    }
-
-    public String getVersion() {
-        return "V0.1-alpha";
+    @Override
+    public Spotify create() {
+        return null;
     }
 }
