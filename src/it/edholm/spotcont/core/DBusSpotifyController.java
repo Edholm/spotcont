@@ -21,6 +21,7 @@ import org.freedesktop.DBus;
 import org.freedesktop.dbus.DBusConnection;
 import org.freedesktop.dbus.DBusInterface;
 import org.freedesktop.dbus.DBusInterfaceName;
+import org.freedesktop.dbus.Variant;
 import org.freedesktop.dbus.exceptions.DBusException;
 
 import java.util.logging.Level;
@@ -51,15 +52,16 @@ public class DBusSpotifyController implements Spotify {
 
     @Override
     public Song getSong() {
-//        Variant variant = spotifyMethods.Metadata();
-//
-//        System.out.println(variant.toString());
+        if(!isRunning()) return null;
+        
+        Variant variant = readProp("Metadata");
+        System.out.println(variant.toString());
         return null;
     }
 
     @Override
     public void toggle() {
-        if (!isConnected) return;
+        if (!isRunning()) return;
 
         boolean possible = canToggle();
         if (LOGGER.isLoggable(Level.FINE)) {
@@ -73,7 +75,7 @@ public class DBusSpotifyController implements Spotify {
 
     @Override
     public void play() {
-        if (isConnected && canPlay()) {
+        if (isRunning() && canPlay()) {
             spotifyMethods.Play();
             LOGGER.log(Level.INFO, "LOG00040: Starting playback");
         }
@@ -81,10 +83,43 @@ public class DBusSpotifyController implements Spotify {
 
     @Override
     public void pause() {
-        if (isConnected && canPause()) {
+        if (isRunning() && canPause()) {
             spotifyMethods.Stop();
             LOGGER.log(Level.INFO, "LOG00030: Pausing playback");
         }
+    }
+
+    @Override
+    public void next() {
+        if(isRunning() && canGoNext()) {
+            spotifyMethods.Next();
+            LOGGER.log(Level.INFO, "LOG00060: Playing next song");
+        }
+    }
+
+    @Override
+    public void previous() {
+        if(isRunning() && canGoPrevious()) {
+            spotifyMethods.Previous();
+            LOGGER.log(Level.INFO, "LOG00070: Playing previous song");
+        }
+    }
+
+    @Override
+    public boolean isPlaying() {
+        if(!isRunning()) return false;
+        
+        switch (getPlaybackStatus()) {
+            case "Playing":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean isRunning() {
+        return isConnected;
     }
 
     private void connect() {

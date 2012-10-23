@@ -44,4 +44,16 @@ public interface Spotify {
 
     /** Pause playback. */
     void pause();
+    
+    /** Play the next song */
+    void next();
+    
+    /** Play the previous song */
+    void previous();
+    
+    /** @returns true if spotify is running and playing a song */
+    boolean isPlaying();
+    
+    /** @returns true if spotify is running, else false */
+    boolean isRunning();
 }
