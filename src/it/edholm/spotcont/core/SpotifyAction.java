@@ -16,6 +16,8 @@
  */
 package it.edholm.spotcont.core;
 
+import it.edholm.spotcont.core.utilities.IFactory;
+
 /**
  * Used to simplify doing an action parsed from the command line.
  *
@@ -33,7 +35,6 @@ public enum SpotifyAction {
         @Override
         public void doAction() {
             spotifyController.play();
-            ;
         }
     },
     PAUSE {
@@ -53,11 +54,11 @@ public enum SpotifyAction {
         public void doAction() { /* Do nothing. Useful to avoid null checks */ }
     };
 
-    private final Spotify spotifyController;
+    private static final Spotify spotifyController;
 
-    private SpotifyAction() {
-        ApplicationInfo appInfo = ApplicationInfo.getInstance();
-        spotifyController = appInfo.getSpotifyController();
+    static {
+        IFactory<Spotify> factory = new SpotifyControllerFactory();
+        spotifyController = factory.create();
     }
 
     public abstract void doAction();
