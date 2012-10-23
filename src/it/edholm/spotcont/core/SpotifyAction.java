@@ -17,7 +17,7 @@
 package it.edholm.spotcont.core;
 
 import it.edholm.spotcont.core.utilities.IFactory;
-import it.edholm.spotcont.models.Song;
+import it.edholm.spotcont.core.models.Song;
 
 /**
  * Used to simplify doing an action parsed from the command line.

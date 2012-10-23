@@ -16,7 +16,7 @@
  */
 package it.edholm.spotcont.core;
 
-import it.edholm.spotcont.models.Song;
+import it.edholm.spotcont.core.models.Song;
 
 /**
  * Class description goes here
