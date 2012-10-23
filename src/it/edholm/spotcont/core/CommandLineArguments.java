@@ -22,26 +22,26 @@ import com.beust.jcommander.Parameter;
  * Describes the available command line options.
  *
  * @author Emil Edholm
- * @date   2012-10-23
+ * @date 2012-10-23
  */
 class CommandLineArguments {
-    
+
     public static final String CMD_USAGE = "--help";
-    @Parameter(names = { "-h", CMD_USAGE }, description = "Shows this message")
+    @Parameter(names = {"-h", CMD_USAGE}, description = "Shows this message")
     public boolean usage;
 
     public static final String CMD_TOGGLE = "--toggle";
     @Parameter(names = {"-t", CMD_TOGGLE}, description = "Toggle playback")
     public boolean toggle;
-    
-    public static final String CMD_PRINT_SONG = "--print-song";
+
+    public static final String  CMD_PRINT_SONG = "--print-song";
     @Parameter(names = {"-l", CMD_PRINT_SONG}, description = "Print the currently playing song")
-    public boolean printSong = true;
-    
+    public              boolean printSong      = true;
+
     public static final String CMD_PLAY = "--play";
     @Parameter(names = {"-p", CMD_PLAY}, description = "Start playback")
-    public boolean play ;
-    
+    public boolean play;
+
     public static final String CMD_PAUSE = "--pause";
     @Parameter(names = {"-s", CMD_PAUSE}, description = "Pause playback")
     public boolean pause;

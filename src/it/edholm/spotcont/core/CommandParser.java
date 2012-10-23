@@ -18,6 +18,8 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
+import java.util.EnumSet;
+
 /**
  * Class description goes here
  *
@@ -26,20 +28,34 @@ import com.beust.jcommander.JCommander;
  */
 class CommandParser {
 
-    private final CommandLineArguments options;
-    private final JCommander jCommander;
+    private final CommandLineArguments   options;
+    private final JCommander             jCommander;
+    private       EnumSet<SpotifyAction> action;
 
     CommandParser(CommandLineArguments options, JCommander jCommander) {
         this.options = options;
         this.jCommander = jCommander;
+        action = EnumSet.noneOf(SpotifyAction.class);
     }
 
-    public void parseCmdOptions() {
+    public EnumSet<SpotifyAction> decideAction() {
+        action.clear();
+
         if (options.usage) {
             jCommander.usage();
-            return;
+            action.add(SpotifyAction.NOTHING);
         }
-        
-        
+        if (options.printSong) {
+            action.add(SpotifyAction.PRINT_SONG);
+        }
+        if (options.play) {
+            action.add(SpotifyAction.PLAY);
+        } else if (options.pause) {
+            action.add(SpotifyAction.PAUSE);
+        } else if (options.toggle) {
+            action.add(SpotifyAction.TOGGLE);
+        }
+
+        return action;
     }
 }

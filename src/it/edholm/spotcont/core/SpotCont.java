@@ -41,7 +41,7 @@ public class SpotCont {
                 break;
             default:
                 CommandParser parseOptions = new CommandParser(cmdArgs, jCom);
-                parseOptions.parseCmdOptions();
+                parseOptions.decideAction();
                 break;
         }
     }

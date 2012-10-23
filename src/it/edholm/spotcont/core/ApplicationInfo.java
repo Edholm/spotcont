@@ -20,16 +20,16 @@ package it.edholm.spotcont.core;
  * Singleton for getting various application information such as name, version etc.
  *
  * @author Emil Edholm
- * @date   2012-10-23
+ * @date 2012-10-23
  */
 public class ApplicationInfo {
-    private static ApplicationInfo ourInstance;
 
+    private static ApplicationInfo ourInstance;
 
     private ApplicationInfo() { }
 
     public static ApplicationInfo getInstance() {
-        if(ourInstance == null) {
+        if (ourInstance == null) {
             ourInstance = new ApplicationInfo();
         }
         return ourInstance;
@@ -42,5 +42,9 @@ public class ApplicationInfo {
     public String getVersion() {
         return "V0.1-alpha";
     }
-    
+
+    public Spotify getSpotifyController() {
+        // TODO: Return a concrete implementation when that has been written.
+        return null;
+    }
 }
