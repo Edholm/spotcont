@@ -63,7 +63,10 @@ class CommandParser {
         if(options.prev) {
             action.add(SpotifyAction.PREVIOUS);
         }
-
+        if(options.isPlaying) {
+            action.add(SpotifyAction.IS_PLAYING);
+        }
+        
         return action;
     }
 }

@@ -63,6 +63,14 @@ public enum SpotifyAction {
             spotifyController.previous();
         }
     },
+    IS_PLAYING {
+        @Override
+        public void doAction() {
+            if(spotifyController.isRunning()) {
+                System.out.println("Playing: " + spotifyController.isPlaying());
+            }
+        }
+    },
     NOTHING {
         @Override
         public void doAction() { /* Do nothing. Useful to avoid null checks */ }

@@ -53,6 +53,10 @@ class CommandLineArguments {
     public static final String CMD_PREV = "--prev";
     @Parameter(names = {CMD_PREV}, description = "Play previous song")
     public boolean prev;
+
+    public static final String CMD_IS_PLAYING = "--is-playing";
+    @Parameter(names = {CMD_IS_PLAYING}, description = "Prints whether or not spotify is playing")
+    public boolean isPlaying;
     
     public static final String CMD_QUIET = "--quiet";
     @Parameter(names = {CMD_QUIET}, description = "Disable logging and unnecessary console output")
