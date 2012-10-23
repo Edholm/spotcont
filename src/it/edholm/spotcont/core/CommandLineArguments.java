@@ -53,4 +53,8 @@ class CommandLineArguments {
     public static final String CMD_PREV = "--prev";
     @Parameter(names = {CMD_PREV}, description = "Play previous song")
     public boolean prev;
+    
+    public static final String CMD_QUIET = "--quiet";
+    @Parameter(names = {CMD_QUIET}, description = "Disable logging and unnecessary console output")
+    public boolean quiet;
 }
