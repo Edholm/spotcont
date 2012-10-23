@@ -29,7 +29,7 @@ import java.util.EnumSet;
 public class SpotCont {
 
     public static void main(String[] argv) {
-        argv = new String[]{"-p", "-l"};
+        argv = new String[]{"-s", "-l"};
 
         init(argv);
     }

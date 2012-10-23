@@ -16,18 +16,33 @@
  */
 package it.edholm.spotcont.core;
 
-import it.edholm.spotcont.core.utilities.IFactory;
+import it.edholm.spotcont.models.Song;
 
 /**
- * Creates a Spotify controller.
+ * Class description goes here
  *
  * @author Emil Edholm
  * @date 10/23/12
  */
-public class SpotifyControllerFactory implements IFactory<Spotify> {
+public class DBusSpotifyController implements Spotify {
 
     @Override
-    public Spotify create() {
-        return new DBusSpotifyController();
+    public Song getSong() {
+        return null;
+    }
+
+    @Override
+    public void toggle() {
+        
+    }
+
+    @Override
+    public void play() {
+        
+    }
+
+    @Override
+    public void pause() {
+        
     }
 }
