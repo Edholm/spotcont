@@ -18,6 +18,8 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
+import java.util.EnumSet;
+
 /**
  * Class description goes here
  *
@@ -29,6 +31,10 @@ public class SpotCont {
     public static void main(String[] argv) {
         argv = new String[]{"-p", "-l"};
 
+        init(argv);
+    }
+    
+    private static void init(String[] argv) {
         CommandLineArguments cmdArgs = new CommandLineArguments();
         JCommander jCom = new JCommander(cmdArgs, argv);
 
@@ -41,7 +47,11 @@ public class SpotCont {
                 break;
             default:
                 CommandParser parseOptions = new CommandParser(cmdArgs, jCom);
-                parseOptions.decideAction();
+                EnumSet<SpotifyAction> actions = parseOptions.decideAction();
+
+                for(SpotifyAction act : actions) {
+                    act.doAction();
+                }
                 break;
         }
     }
