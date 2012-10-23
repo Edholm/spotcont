@@ -25,18 +25,24 @@ import com.beust.jcommander.Parameter;
  * @date   2012-10-23
  */
 class CommandLineArguments {
-    @Parameter(names = { "-h", "--help" }, description = "Shows this message")
+    
+    public static final String CMD_USAGE = "--help";
+    @Parameter(names = { "-h", CMD_USAGE }, description = "Shows this message")
     public boolean usage;
 
-    @Parameter(names = {"-t", "--toggle"}, description = "Toggle playback")
+    public static final String CMD_TOGGLE = "--toggle";
+    @Parameter(names = {"-t", CMD_TOGGLE}, description = "Toggle playback")
     public boolean toggle;
     
-    @Parameter(names = {"-l", "--list"}, description = "Show the current playing song")
-    public boolean list = true;
+    public static final String CMD_PRINT_SONG = "--print-song";
+    @Parameter(names = {"-l", CMD_PRINT_SONG}, description = "Print the currently playing song")
+    public boolean printSong = true;
     
-    @Parameter(names = {"-p", "--play"}, description = "Start playback")
+    public static final String CMD_PLAY = "--play";
+    @Parameter(names = {"-p", CMD_PLAY}, description = "Start playback")
     public boolean play ;
     
-    @Parameter(names = {"-s", "--stop"}, description = "Stop playback")
-    public boolean stop;
+    public static final String CMD_PAUSE = "--pause";
+    @Parameter(names = {"-s", CMD_PAUSE}, description = "Pause playback")
+    public boolean pause;
 }
