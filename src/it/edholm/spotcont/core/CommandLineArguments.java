@@ -17,9 +17,6 @@
 package it.edholm.spotcont.core;
 
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.internal.Lists;
-
-import java.util.List;
 
 /**
  * Describes the available command line options.
@@ -27,10 +24,7 @@ import java.util.List;
  * @author Emil Edholm
  * @date   2012-10-23
  */
-class CmdOptions {
-    @Parameter
-    public List<String> parameters = Lists.newArrayList();
-
+class CommandLineArguments {
     @Parameter(names = { "-h", "--help" }, description = "Shows this message")
     public boolean usage;
 

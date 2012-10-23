@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2012. Emil Edholm
- *
+ *     
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -22,20 +22,24 @@ import com.beust.jcommander.JCommander;
  * Class description goes here
  *
  * @author Emil Edholm
- * Date:   2012-10-23
+ * @date 10/23/12
  */
-public class Main {
-    public static void main(String[] args) {
-        args = new String[] {"-p", "-l", "-h"};
-        
-        CmdOptions cmdOptions = new CmdOptions();
-        JCommander commander = new JCommander(cmdOptions, args);
-        ApplicationInfo ai = ApplicationInfo.getInstance();
-        
-        commander.setProgramName(ai.getApplicationName());
-        
-        if(cmdOptions.usage) {
-            commander.usage();
+class CommandParser {
+
+    private final CommandLineArguments options;
+    private final JCommander jCommander;
+
+    CommandParser(CommandLineArguments options, JCommander jCommander) {
+        this.options = options;
+        this.jCommander = jCommander;
+    }
+
+    public void parseCmdOptions() {
+        if (options.usage) {
+            jCommander.usage();
+            return;
         }
+        
+        
     }
 }
