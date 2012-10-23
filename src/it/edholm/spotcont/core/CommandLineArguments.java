@@ -34,9 +34,9 @@ class CommandLineArguments {
     @Parameter(names = {"-t", CMD_TOGGLE}, description = "Toggle playback")
     public boolean toggle;
 
-    public static final String  CMD_PRINT_SONG = "--print-song";
+    public static final String CMD_PRINT_SONG = "--print-song";
     @Parameter(names = {"-l", CMD_PRINT_SONG}, description = "Print the currently playing song")
-    public              boolean printSong      = true;
+    public boolean printSong;
 
     public static final String CMD_PLAY = "--play";
     @Parameter(names = {"-p", CMD_PLAY}, description = "Start playback")
@@ -45,4 +45,12 @@ class CommandLineArguments {
     public static final String CMD_PAUSE = "--pause";
     @Parameter(names = {"-s", CMD_PAUSE}, description = "Pause playback")
     public boolean pause;
+
+    public static final String CMD_NEXT = "--next";
+    @Parameter(names = {CMD_NEXT}, description = "Play next song")
+    public boolean next;
+
+    public static final String CMD_PREV = "--prev";
+    @Parameter(names = {CMD_PREV}, description = "Play previous song")
+    public boolean prev;
 }
