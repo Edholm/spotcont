@@ -21,7 +21,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Unit test of the CommandParser.
@@ -47,7 +47,7 @@ public class CommandParserTest {
     @Test
     public void testDecideToggle() throws Exception {
         arguments.toggle = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.TOGGLE) : "Action Toggle must exist";
@@ -56,7 +56,7 @@ public class CommandParserTest {
     @Test
     public void testPrintSong() {
         arguments.printSong = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.PRINT_SONG) : "Action PRINT_SONG must exist";
@@ -65,7 +65,7 @@ public class CommandParserTest {
     @Test
     public void testPrintUsage() {
         arguments.usage = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.NOTHING) : "Action NOTHING must exist";
@@ -74,7 +74,7 @@ public class CommandParserTest {
     @Test
     public void testPlay() {
         arguments.play = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.PLAY) : "Action PLAY must exist";
@@ -83,7 +83,7 @@ public class CommandParserTest {
     @Test
     public void testPause() {
         arguments.pause = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.PAUSE) : "Action PAUSE must exist";
@@ -92,7 +92,7 @@ public class CommandParserTest {
     @Test
     public void testNext() {
         arguments.next = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.NEXT) : "Action NEXT must exist";
@@ -101,7 +101,7 @@ public class CommandParserTest {
     @Test
     public void testPrevios() {
         arguments.prev = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.PREVIOUS) : "Action PREVIOUS must exist";
@@ -110,7 +110,7 @@ public class CommandParserTest {
     @Test
     public void testIsPlaying() {
         arguments.isPlaying = true;
-        EnumSet<SpotifyAction> parsedActions = getActions();
+        Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.IS_PLAYING) : "Action IS_PLAYING must exist";
@@ -124,7 +124,7 @@ public class CommandParserTest {
 
     }
     
-    private EnumSet<SpotifyAction> getActions() { 
+    private Set<Action> getActions() { 
         return new CommandParser(arguments, jCommander).decideAction(); 
     }
 }

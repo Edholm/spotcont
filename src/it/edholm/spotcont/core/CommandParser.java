@@ -18,10 +18,12 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
-import java.util.EnumSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
- * Class description goes here
+ * Parses and constructs a list of actions to take based on the command line
+ * arguments.
  *
  * @author Emil Edholm
  * @date 10/23/12
@@ -30,17 +32,17 @@ class CommandParser {
 
     private final CommandLineArguments   options;
     private final JCommander             jCommander;
-    private       EnumSet<SpotifyAction> action;
+    private       Set<Action> action;
 
     CommandParser(CommandLineArguments options, JCommander jCommander) {
         this.options = options;
         this.jCommander = jCommander;
-        action = EnumSet.noneOf(SpotifyAction.class);
+        action = new TreeSet<Action>();
     }
 
-    public EnumSet<SpotifyAction> decideAction() {
+    public Set<Action> decideAction() {
         action.clear();
-
+        
         if (options.usage) {
             jCommander.usage();
             action.add(SpotifyAction.NOTHING);
