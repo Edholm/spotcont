@@ -18,7 +18,7 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
-import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * Class description goes here
@@ -45,9 +45,9 @@ public class SpotCont {
                 break;
             default:
                 CommandParser parseOptions = new CommandParser(cmdArgs, jCom);
-                EnumSet<SpotifyAction> actions = parseOptions.decideAction();
+                Set<Action> actions = parseOptions.decideAction();
 
-                for(SpotifyAction act : actions) {
+                for(Action act : actions) {
                     act.doAction();
                 }
                 break;
