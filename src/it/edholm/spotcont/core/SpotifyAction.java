@@ -25,7 +25,7 @@ import it.edholm.spotcont.core.models.Song;
  * @author Emil Edholm
  * @date 2012-10-23
  */
-public enum SpotifyAction {
+public enum SpotifyAction implements Action {
     PRINT_SONG {
         @Override
         public void doAction() {
@@ -81,7 +81,5 @@ public enum SpotifyAction {
     static {
         IFactory<Spotify> factory = new SpotifyControllerFactory();
         spotifyController = factory.create();
-    }
-
-    public abstract void doAction();
+    }   
 }
