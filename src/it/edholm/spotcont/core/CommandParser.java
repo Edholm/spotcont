@@ -18,8 +18,8 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Parses and constructs a list of actions to take based on the command line
@@ -30,22 +30,26 @@ import java.util.TreeSet;
  */
 class CommandParser {
 
-    private final CommandLineArguments   options;
-    private final JCommander             jCommander;
-    private       Set<Action> action;
+    private final CommandLineArguments options;
+    private final JCommander           jCommander;
+    private       Set<Action>          action;
 
     CommandParser(CommandLineArguments options, JCommander jCommander) {
         this.options = options;
         this.jCommander = jCommander;
-        action = new TreeSet<Action>();
+        action = new HashSet<Action>();
     }
 
     public Set<Action> decideAction() {
         action.clear();
-        
+
         if (options.usage) {
-            jCommander.usage();
-            action.add(SpotifyAction.NOTHING);
+            action.add(new Action() {
+                @Override
+                public void doAction() {
+                    jCommander.usage();
+                }
+            });
         }
         if (options.printSong) {
             action.add(SpotifyAction.PRINT_SONG);
@@ -59,16 +63,18 @@ class CommandParser {
         if (options.toggle) {
             action.add(SpotifyAction.TOGGLE);
         }
-        if(options.next) {
+        if (options.next) {
             action.add(SpotifyAction.NEXT);
         }
-        if(options.prev) {
+        if (options.prev) {
             action.add(SpotifyAction.PREVIOUS);
         }
-        if(options.isPlaying) {
+        if (options.isPlaying) {
             action.add(SpotifyAction.IS_PLAYING);
         }
-        
+
+        // TODO: Add action for quiet flag.
+
         return action;
     }
 }

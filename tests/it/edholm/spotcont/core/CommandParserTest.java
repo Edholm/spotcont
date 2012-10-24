@@ -68,7 +68,6 @@ public class CommandParserTest {
         Set<Action> parsedActions = getActions();
 
         assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
-        assert parsedActions.contains(SpotifyAction.NOTHING) : "Action NOTHING must exist";
     }
 
     @Test

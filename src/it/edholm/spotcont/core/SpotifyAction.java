@@ -70,10 +70,6 @@ public enum SpotifyAction implements Action {
                 System.out.println("Playing: " + spotifyController.isPlaying());
             }
         }
-    },
-    NOTHING {
-        @Override
-        public void doAction() { /* Do nothing. Useful to avoid null checks */ }
     };
 
     private static final Spotify spotifyController;
