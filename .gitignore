@@ -1,0 +1,14 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Other files/folders #
+*.uxf
+.settings
+.idea
+*.iml
+
+META-INF
