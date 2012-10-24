@@ -15,8 +15,8 @@ License
 Copyright (C) 2012 Emil Edholm
 This software is licensed under the [GPLv3][5]
 
-[1] http://www.spotify.com/se/download/previews/                        "Spotify preview"
-[2] http://www.oracle.com/technetwork/java/javase/downloads/index.html  "Oracle jdk"
-[3] http://jcommander.org/                                              "jCommander"
-[4] http://dbus.freedesktop.org/doc/dbus-java/                          "dbus-java"
-[5] http://www.gnu.org/licenses/gpl.txt                                 "GPLv3 license"
+[1]: http://www.spotify.com/se/download/previews/                        "Spotify preview"
+[2]: http://www.oracle.com/technetwork/java/javase/downloads/index.html  "Oracle jdk"
+[3]: http://jcommander.org/                                              "jCommander"
+[4]: http://dbus.freedesktop.org/doc/dbus-java/                          "dbus-java"
+[5]: http://www.gnu.org/licenses/gpl.txt                                 "GPLv3 license"
