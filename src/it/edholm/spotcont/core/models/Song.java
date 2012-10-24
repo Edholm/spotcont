@@ -17,6 +17,7 @@
 package it.edholm.spotcont.core.models;
 
 import java.util.Map;
+import java.util.Vector;
 
 /**
  * Represents a song (Artist, title, album and year).
@@ -36,12 +37,12 @@ public class Song {
     }
     
     /** Creates a song from the Spotify meta-data */
-    public static Song valueOf(Map<String, String> metadata) {
-        String artist = metadata.get("xesam:artist");
-        String album  = metadata.get("xesam:album");
-        String title  = metadata.get("xesam:title");
-        String date   = metadata.get("xesam:contentCreated");
-        int year = Integer.parseInt(date.substring(0, 3));
+    public static Song valueOf(Map<String, Object> metadata) {
+        String artist = (String) ((Vector) metadata.get("xesam:artist")).get(0);
+        String album  = (String) metadata.get("xesam:album");
+        String title  = (String) metadata.get("xesam:title");
+        String date   = (String) metadata.get("xesam:contentCreated");
+        int year = Integer.parseInt(date.substring(0, 4));
         
         return new Song(artist, title, album, year);
     }

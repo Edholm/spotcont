@@ -24,6 +24,9 @@ import org.freedesktop.dbus.DBusInterfaceName;
 import org.freedesktop.dbus.Variant;
 import org.freedesktop.dbus.exceptions.DBusException;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,9 +57,23 @@ public class DBusSpotifyController implements Spotify {
     public Song getSong() {
         if(!isRunning()) return null;
         
-        Variant variant = readProp("Metadata");
-        System.out.println(variant.toString());
-        return null;
+        Map<String, Variant> allProps = spotifyProperties.GetAll(SPOTIFY_DBUS_INTERFACE_NAME);
+        Variant metadata = allProps.get("Metadata");
+        Map<String, Variant> metaMap = (Map<String, Variant>) metadata.getValue();
+        
+        Iterator<Map.Entry<String, Variant>> iterator = metaMap.entrySet().iterator();
+        Map<String, Object> spotifyMetadata = new HashMap<String, Object>(metaMap.size());
+
+        Map.Entry<String, Variant> entry = null;
+        while (iterator.hasNext()) {
+            entry = iterator.next();
+            
+            
+            Object value = entry.getValue().getValue();
+            spotifyMetadata.put(entry.getKey(), value);
+        }
+        
+        return Song.valueOf(spotifyMetadata);
     }
 
     @Override
