@@ -52,7 +52,8 @@ public class DBusSpotifyController implements Spotify {
     @Override
     public Song getSong() {
         if (!connect()) return null;
-
+        
+        logd("Trying to fetch song meta-data");
         Map<String, Variant> allProps = spotifyProperties.GetAll(SPOTIFY_DBUS_INTERFACE_NAME);
         Variant metadata = allProps.get("Metadata");
         Map<String, Variant> metaMap = (Map<String, Variant>) metadata.getValue();
@@ -64,12 +65,12 @@ public class DBusSpotifyController implements Spotify {
         while (iterator.hasNext()) {
             entry = iterator.next();
 
-
+            
             Object value = entry.getValue().getValue();
             spotifyMetadata.put(entry.getKey(), value);
         }
 
-
+        logd("Found " + spotifyMetadata.size() + " meta-data fields.");
         disconnect();
         return Song.valueOf(spotifyMetadata);
     }
@@ -79,12 +80,12 @@ public class DBusSpotifyController implements Spotify {
         if (!connect()) return;
 
         boolean possible = canToggle();
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Toggle possible: " + possible);
-        }
+        logd("Toggle possible: " + possible);
+        
         if (possible) {
             spotifyMethods.PlayPause();
-            LOGGER.log(Level.INFO, "LOG00050: Toggling playback");
+
+            logd("Toggling playback");
         }
 
         disconnect();
@@ -94,7 +95,8 @@ public class DBusSpotifyController implements Spotify {
     public void play() {
         if (connect() && canPlay()) {
             spotifyMethods.Play();
-            LOGGER.log(Level.INFO, "LOG00040: Starting playback");
+
+            logd("Starting playback");
         }
 
         disconnect();
@@ -104,7 +106,8 @@ public class DBusSpotifyController implements Spotify {
     public void pause() {
         if (connect() && canPause()) {
             spotifyMethods.Stop();
-            LOGGER.log(Level.INFO, "LOG00030: Pausing playback");
+
+            logd("Pausing playback");
         }
 
         disconnect();
@@ -114,7 +117,8 @@ public class DBusSpotifyController implements Spotify {
     public void next() {
         if (connect() && canGoNext()) {
             spotifyMethods.Next();
-            LOGGER.log(Level.INFO, "LOG00060: Playing next song");
+
+            logd("Playing next song");
         }
         
         disconnect();
@@ -124,7 +128,8 @@ public class DBusSpotifyController implements Spotify {
     public void previous() {
         if (connect() && canGoPrevious()) {
             spotifyMethods.Previous();
-            LOGGER.log(Level.INFO, "LOG00070: Playing previous song");
+            
+            logd("Playing previous song");
         }
         
         disconnect();
@@ -152,11 +157,10 @@ public class DBusSpotifyController implements Spotify {
 
     /** @return true if connection successfull or already connected, else false */
     private boolean connect() {
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Attempting to connect to DBus");
-        }
+        logd("Attempting to connect to DBus");
+        
         if(dBusConnection != null && isConnected) {
-            if (LOGGER.isLoggable(Level.FINE)) { LOGGER.log(Level.FINE, "DBus already connected."); }
+            logd("DBus already connected.");
             
             return true;
         }
@@ -182,9 +186,7 @@ public class DBusSpotifyController implements Spotify {
         spotifyMethods = null;
         spotifyProperties = null;
 
-        if (LOGGER.isLoggable(Level.FINE)) {
-            LOGGER.log(Level.FINE, "Disconnecting dbus");
-        }
+        logd("Disconnecting dbus");
     }
 
     private boolean canGoNext() {
@@ -214,6 +216,12 @@ public class DBusSpotifyController implements Spotify {
     private <A> A readProp(String propName) {
         return spotifyProperties.Get(SPOTIFY_DBUS_INTERFACE_NAME, propName);
     }
+    
+    private void logd(String msg) {
+        if (LOGGER.isLoggable(Level.FINE)) { 
+            LOGGER.log(Level.FINE, msg); 
+        }
+    }
 
 
     /** This interface matches the DBus Spotify interface */
@@ -230,6 +238,5 @@ public class DBusSpotifyController implements Spotify {
 
         void Stop();
 
-        // Variant Metadata();
     }
 }
