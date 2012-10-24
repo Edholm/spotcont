@@ -18,10 +18,11 @@ package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
 
+import java.util.Collections;
 import java.util.Set;
 
 /**
- * Class description goes here
+ * The application entry point.
  *
  * @author Emil Edholm
  * @date 2012-10-23
@@ -47,7 +48,7 @@ public class SpotCont {
                 CommandParser parseOptions = new CommandParser(cmdArgs, jCom);
                 Set<Action> actions = parseOptions.decideAction();
 
-                for(Action act : actions) {
+                for (Action act : actions) {
                     act.doAction();
                 }
                 break;

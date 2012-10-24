@@ -49,36 +49,34 @@ public class DBusSpotifyController implements Spotify {
     private DBus.Properties spotifyProperties;
     private boolean         isConnected;
 
-    public DBusSpotifyController() {
-        connect();
-    }
-
     @Override
     public Song getSong() {
-        if(!isRunning()) return null;
-        
+        if (!connect()) return null;
+
         Map<String, Variant> allProps = spotifyProperties.GetAll(SPOTIFY_DBUS_INTERFACE_NAME);
         Variant metadata = allProps.get("Metadata");
         Map<String, Variant> metaMap = (Map<String, Variant>) metadata.getValue();
-        
+
         Iterator<Map.Entry<String, Variant>> iterator = metaMap.entrySet().iterator();
         Map<String, Object> spotifyMetadata = new HashMap<String, Object>(metaMap.size());
 
         Map.Entry<String, Variant> entry = null;
         while (iterator.hasNext()) {
             entry = iterator.next();
-            
-            
+
+
             Object value = entry.getValue().getValue();
             spotifyMetadata.put(entry.getKey(), value);
         }
-        
+
+
+        disconnect();
         return Song.valueOf(spotifyMetadata);
     }
 
     @Override
     public void toggle() {
-        if (!isRunning()) return;
+        if (!connect()) return;
 
         boolean possible = canToggle();
         if (LOGGER.isLoggable(Level.FINE)) {
@@ -88,45 +86,58 @@ public class DBusSpotifyController implements Spotify {
             spotifyMethods.PlayPause();
             LOGGER.log(Level.INFO, "LOG00050: Toggling playback");
         }
+
+        disconnect();
     }
 
     @Override
     public void play() {
-        if (isRunning() && canPlay()) {
+        if (connect() && canPlay()) {
             spotifyMethods.Play();
             LOGGER.log(Level.INFO, "LOG00040: Starting playback");
         }
+
+        disconnect();
     }
 
     @Override
     public void pause() {
-        if (isRunning() && canPause()) {
+        if (connect() && canPause()) {
             spotifyMethods.Stop();
             LOGGER.log(Level.INFO, "LOG00030: Pausing playback");
         }
+
+        disconnect();
     }
 
     @Override
     public void next() {
-        if(isRunning() && canGoNext()) {
+        if (connect() && canGoNext()) {
             spotifyMethods.Next();
             LOGGER.log(Level.INFO, "LOG00060: Playing next song");
         }
+        
+        disconnect();
     }
 
     @Override
     public void previous() {
-        if(isRunning() && canGoPrevious()) {
+        if (connect() && canGoPrevious()) {
             spotifyMethods.Previous();
             LOGGER.log(Level.INFO, "LOG00070: Playing previous song");
         }
+        
+        disconnect();
     }
 
     @Override
     public boolean isPlaying() {
-        if(!isRunning()) return false;
+        if (!connect()) return false;
+
+        String status = getPlaybackStatus();
+        disconnect();
         
-        switch (getPlaybackStatus()) {
+        switch (status) {
             case "Playing":
                 return true;
             default:
@@ -139,12 +150,18 @@ public class DBusSpotifyController implements Spotify {
         return isConnected;
     }
 
-    private void connect() {
+    /** @return true if connection successfull or already connected, else false */
+    private boolean connect() {
         if (LOGGER.isLoggable(Level.FINE)) {
             LOGGER.log(Level.FINE, "Attempting to connect to DBus");
         }
-        try {
+        if(dBusConnection != null && isConnected) {
+            if (LOGGER.isLoggable(Level.FINE)) { LOGGER.log(Level.FINE, "DBus already connected."); }
             
+            return true;
+        }
+        
+        try {
             dBusConnection = DBusConnection.getConnection(DBusConnection.SESSION);
             spotifyMethods = dBusConnection.getRemoteObject(SPOTIFY_DBUS_SERVICE_NAME, SPOTIFY_DBUS_PATH, Player.class);
             spotifyProperties = (DBus.Properties) dBusConnection.getRemoteObject(SPOTIFY_DBUS_SERVICE_NAME, SPOTIFY_DBUS_PATH);
@@ -152,11 +169,19 @@ public class DBusSpotifyController implements Spotify {
         } catch (DBusException e) {
             isConnected = false;
             LOGGER.log(Level.WARNING, "LOG00020: connect()", e);
+            disconnect();
         }
+        
+        return isConnected;
     }
 
     private void disconnect() {
         dBusConnection.disconnect();
+
+        dBusConnection = null;
+        spotifyMethods = null;
+        spotifyProperties = null;
+
         if (LOGGER.isLoggable(Level.FINE)) {
             LOGGER.log(Level.FINE, "Disconnecting dbus");
         }
