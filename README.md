@@ -30,7 +30,7 @@ At the moment (v1.0-beta) there exists no ant build file, but may be included in
 
 Example usage
 ----------------------
-If we assume you have a shell script that launces spotcont.
+If we assume you have a shell script that launches spotcont.
 
 `# spotcont --print-song`
 
