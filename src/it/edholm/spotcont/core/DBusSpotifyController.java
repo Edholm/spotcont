@@ -152,7 +152,10 @@ public class DBusSpotifyController implements Spotify {
 
     @Override
     public boolean isRunning() {
-        return isConnected;
+        boolean couldConnect = connect();
+        disconnect();
+        
+        return couldConnect;
     }
 
     /** @return true if connection successfull or already connected, else false */
