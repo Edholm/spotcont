@@ -21,6 +21,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Set;
 
 /**
@@ -119,8 +122,49 @@ public class CommandParserTest {
     public void testQuiet() {
         arguments.quiet = true;
         
-        // TODO: Complete testQuiet()
+        // TODO: Complete testQuiet() 
+    }
+    
+    @Test
+    public void testCorrectNumberOfTests() {
+        // This test counts the number of declared Test methods in this class
+        // and compares it to the number of declared fields in the CommandLineArguments.
 
+        // Decrement with 1 since this test should be counted
+        int testMethods = countTestMethods() - 1;
+        int fields = countFields(CommandLineArguments.class);
+        
+        assert testMethods == fields : 
+                "Expected " + fields + " methods, found: " + testMethods;
+    }
+    
+    /** Counts the number of test methods in this class */
+    private int countTestMethods() {
+        Method[] methods = this.getClass().getMethods();
+        
+        int testCount = 0;
+        for(Method m : methods) {
+            if(m.getAnnotation(Test.class) != null) {
+                testCount++;
+            }
+        }
+        
+        return testCount;
+    }
+    
+    /** Searches for non-static fields in the specified class */
+    private int countFields(Class<?> classToSearch) {
+        Field[] fields = classToSearch.getFields();
+        
+        int fieldCount = 0;
+        for(Field f : fields) {
+            // Count all non-static fields.
+            if(!Modifier.isStatic(f.getModifiers())) {
+                fieldCount++;
+            }
+        }
+        
+        return fieldCount;
     }
     
     private Set<Action> getActions() { 
