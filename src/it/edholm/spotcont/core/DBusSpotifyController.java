@@ -184,12 +184,15 @@ public class DBusSpotifyController implements Spotify {
     }
 
     private void disconnect() {
-        dBusConnection.disconnect();
+        if(dBusConnection != null) {
+            dBusConnection.disconnect();
+        }
 
         dBusConnection = null;
         spotifyMethods = null;
         spotifyProperties = null;
-
+        isConnected = false;
+        
         logd("Disconnecting dbus");
     }
 
