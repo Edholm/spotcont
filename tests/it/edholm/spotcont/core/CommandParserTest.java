@@ -96,17 +96,19 @@ public class CommandParserTest {
         arguments.next = true;
         Set<Action> parsedActions = getActions();
 
-        assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
+        assert parsedActions.size() == 2 : "Size expected: 2, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.NEXT) : "Action NEXT must exist";
+        assert parsedActions.contains(SpotifyAction.PRINT_SONG) : "Action PRINT_SONG must exist";
     }
 
     @Test
-    public void testPrevios() {
+    public void testPrevious() {
         arguments.prev = true;
         Set<Action> parsedActions = getActions();
 
-        assert parsedActions.size() == 1 : "Size expected: 1, actual: " + parsedActions.size();
+        assert parsedActions.size() == 2 : "Size expected: 2, actual: " + parsedActions.size();
         assert parsedActions.contains(SpotifyAction.PREVIOUS) : "Action PREVIOUS must exist";
+        assert parsedActions.contains(SpotifyAction.PRINT_SONG) : "Action PRINT_SONG must exist";
     }
 
     @Test

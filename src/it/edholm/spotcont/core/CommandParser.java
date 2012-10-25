@@ -65,9 +65,11 @@ class CommandParser {
         }
         if (options.next) {
             action.add(SpotifyAction.NEXT);
+            action.add(SpotifyAction.PRINT_SONG);
         }
         if (options.prev) {
             action.add(SpotifyAction.PREVIOUS);
+            action.add(SpotifyAction.PRINT_SONG);
         }
         if (options.isPlaying) {
             action.add(SpotifyAction.IS_PLAYING);
