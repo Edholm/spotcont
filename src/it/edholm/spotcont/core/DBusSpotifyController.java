@@ -175,7 +175,8 @@ public class DBusSpotifyController implements Spotify {
             isConnected = true;
         } catch (DBusException e) {
             isConnected = false;
-            LOGGER.log(Level.WARNING, "LOG00020: connect()", e);
+
+            LOGGER.log(Level.INFO, "LOG00080: Unable to connect to Spotify");
             disconnect();
         }
         
