@@ -58,7 +58,7 @@ class CommandLineArguments {
     @Parameter(names = {CMD_IS_PLAYING}, description = "Prints whether or not spotify is playing")
     public boolean isPlaying;
     
-    public static final String CMD_QUIET = "--quiet";
-    @Parameter(names = {CMD_QUIET}, description = "Disable logging and unnecessary console output")
-    public boolean quiet;
+    public static final String CMD_DEBUG = "--debug";
+    @Parameter(names = {CMD_DEBUG}, description = "Enable debug logging and unnecessary console output")
+    public boolean debug;
 }

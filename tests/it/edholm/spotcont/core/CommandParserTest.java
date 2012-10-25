@@ -122,7 +122,7 @@ public class CommandParserTest {
 
     @Test
     public void testQuiet() {
-        arguments.quiet = true;
+        arguments.debug = true;
         
         // TODO: Complete testQuiet() 
     }
