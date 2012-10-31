@@ -17,6 +17,8 @@
 package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
+import it.edholm.spotcont.core.api.Action;
+import it.edholm.spotcont.core.api.impl.SpotifyAction;
 
 import java.util.HashSet;
 import java.util.Set;

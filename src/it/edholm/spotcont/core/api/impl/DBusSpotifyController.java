@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.edholm.spotcont.core;
+package it.edholm.spotcont.core.api.impl;
 
+import it.edholm.spotcont.core.api.Spotify;
 import it.edholm.spotcont.core.models.Song;
 import org.freedesktop.DBus;
 import org.freedesktop.dbus.DBusConnection;

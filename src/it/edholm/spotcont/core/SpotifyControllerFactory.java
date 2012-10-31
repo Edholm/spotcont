@@ -16,6 +16,8 @@
  */
 package it.edholm.spotcont.core;
 
+import it.edholm.spotcont.core.api.Spotify;
+import it.edholm.spotcont.core.api.impl.DBusSpotifyController;
 import it.edholm.spotcont.core.utilities.IFactory;
 
 /**

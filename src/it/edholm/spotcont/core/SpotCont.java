@@ -17,8 +17,8 @@
 package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
+import it.edholm.spotcont.core.api.Action;
 
-import java.util.Collections;
 import java.util.Set;
 
 /**

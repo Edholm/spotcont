@@ -17,6 +17,8 @@
 package it.edholm.spotcont.core;
 
 import com.beust.jcommander.JCommander;
+import it.edholm.spotcont.core.api.Action;
+import it.edholm.spotcont.core.api.impl.SpotifyAction;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
