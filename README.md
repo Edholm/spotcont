@@ -2,6 +2,8 @@ spotcont
 =======
 A Spotify controller using DBus and written in Java.
 
+_Note that this project is deprecated and probably doesn't work anymore... :)_
+
 Requires
 ------------
  * [Spotify >= 0.4.8.282][1]
